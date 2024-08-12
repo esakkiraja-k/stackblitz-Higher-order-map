@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { of, pipe, concatMap, range, delay } from 'rxjs';
+import { of, pipe, concatMap, range, delay, mergeMap, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +14,18 @@ import { of, pipe, concatMap, range, delay } from 'rxjs';
 })
 export class App implements OnInit {
   ngOnInit() {
-    range(1, 5)
-      .pipe(concatMap((i) => of(i).pipe(delay(this.randomDelay()))))
-      .subscribe((l) => console.log('Concat Map:', l));
+  
+    // range(1, 5)
+    //   .pipe(concatMap((i) => of(i).pipe(delay(this.randomDelay()))))
+    //   .subscribe((l) => console.log('Concat Map:', l));
+
+    // range(1, 5)
+    //   .pipe(mergeMap((i) => of(i).pipe(delay(this.randomDelay()))))
+    //   .subscribe((l) => console.log('mergeMap:', l));
+
+    range(21, 5)
+      .pipe(switchMap((i) => of(i).pipe(delay(this.randomDelay()))))
+      .subscribe((l) => console.log('switchMap:', l));
   }
   name = 'Angular';
 
